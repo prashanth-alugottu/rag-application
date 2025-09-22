@@ -1,9 +1,9 @@
+# Updated retriever.py - Using current Cohere embedding model
+
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
-from app.models.embedding_model import load_embedding_model
 from app.utils.text_splitter import split_text
-from langchain_community.embeddings import CohereEmbeddings
-from langchain_community.embeddings.openai import OpenAIEmbeddings
+from langchain_cohere import CohereEmbeddings
 
 def build_vectorstore(file_path):
     """Loads documents, splits them, creates embeddings, and stores in FAISS"""
@@ -15,9 +15,11 @@ def build_vectorstore(file_path):
     documents = loader.load()
     chunks = split_text(documents)
 
-    # embeddings = load_embedding_model()
-
-    embeddings = CohereEmbeddings(user_agent="langchain")
-    # embeddings = OpenAIEmbeddings()
+    # Use the current Cohere embeddings model
+    embeddings = CohereEmbeddings(
+        model="embed-english-v3.0",  # Current embedding model
+        user_agent="langchain"
+    )
+    
     vectorstore = FAISS.from_documents(chunks, embeddings)
     return vectorstore
