@@ -1,0 +1,7 @@
+from langchain_community.embeddings import HuggingFaceEmbeddings
+
+def load_embedding_model():
+    """Loads a Hugging Face embedding model"""
+    model_name = "sentence-transformers/all-MiniLM-L6-v2"
+    embeddings = HuggingFaceEmbeddings(model_name=model_name)
+    return embeddings
