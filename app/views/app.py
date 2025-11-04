@@ -14,6 +14,7 @@ def main():
     try:
         from dotenv import load_dotenv
         load_dotenv()
+        os.environ["COHERE_API_KEY"] = os.getenv("COHERE_API_KEY")
     except:
         if "COHERE_API_KEY" in st.secrets:
             os.environ["COHERE_API_KEY"] = st.secrets["COHERE_API_KEY"]
@@ -31,7 +32,7 @@ def main():
 
         
 
-        os.environ["COHERE_API_KEY"] = os.getenv("COHERE_API_KEY")
+        # os.environ["COHERE_API_KEY"] = os.getenv("COHERE_API_KEY")
         st.success("✅ Document uploaded successfully!")
         
         vectorstore = build_vectorstore(file_path)
