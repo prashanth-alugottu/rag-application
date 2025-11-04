@@ -5,22 +5,28 @@ from app.controllers.retriever import build_vectorstore
 from app.controllers.rag_pipeline import build_rag_chain
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
+if "OPENAI_API_KEY" in st.secrets:
+    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 
 def main():
    
   
-    # Load environment variables
-    try:
-        from dotenv import load_dotenv
-        load_dotenv()
-        os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
-    except:
-        if "OPENAI_API_KEY" in st.secrets:
-            os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+    # # Load environment variables
+    # try:
+    #     from dotenv import load_dotenv
+    #     load_dotenv()
+    #     os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+    # except:
+    #     if "OPENAI_API_KEY" in st.secrets:
+    #         os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+
 
     st.set_page_config(page_title="RAG Chatbot", layout="wide")
-    st.title("🤖 RAG-based Chatbot with LangChain + Cohere")
+    st.title("🤖 RAG-based Chatbot with LangChain + OpenAI")
 
     uploaded_file = st.file_uploader("Upload your document", type=["pdf", "txt"])
     if uploaded_file:
