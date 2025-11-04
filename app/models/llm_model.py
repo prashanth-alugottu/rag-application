@@ -2,15 +2,11 @@
 
 import os
 from langchain_cohere import ChatCohere
-
+from langchain_openai import ChatOpenAI
 def load_llm():
-    """Loads an LLM from Cohere using current available models"""
+    """Loads an LLM from ChatOpenAI using current available models"""
     # Use command-a-03-2025 (most performant) or command-r-08-2024
-    llm = ChatCohere(
-        model="command-a-03-2025",  # Most performant current model
-        # Alternative options:
-        # model="command-r-08-2024",  # Current Command R version
-        # model="command-r-plus-08-2024",  # Current Command R+ version
+    llm = ChatOpenAI(model="gpt-4o-mini",            # or "gpt-4.1" for cost-efficiency
         temperature=0.3,
         max_tokens=512
     )

@@ -4,6 +4,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from app.utils.text_splitter import split_text
 from langchain_cohere import CohereEmbeddings
+from langchain_openai import OpenAIEmbeddings
 
 def build_vectorstore(file_path):
     """Loads documents, splits them, creates embeddings, and stores in FAISS"""
@@ -16,9 +17,8 @@ def build_vectorstore(file_path):
     chunks = split_text(documents)
 
     # Use the current Cohere embeddings model
-    embeddings = CohereEmbeddings(
-        model="embed-english-v3.0",  # Current embedding model
-        user_agent="langchain"
+    embeddings = OpenAIEmbeddings(
+        model="text-embedding-3-large"
     )
     
     vectorstore = FAISS.from_documents(chunks, embeddings)

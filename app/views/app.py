@@ -14,10 +14,10 @@ def main():
     try:
         from dotenv import load_dotenv
         load_dotenv()
-        os.environ["COHERE_API_KEY"] = os.getenv("COHERE_API_KEY")
+        os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
     except:
-        if "COHERE_API_KEY" in st.secrets:
-            os.environ["COHERE_API_KEY"] = st.secrets["COHERE_API_KEY"]
+        if "OPENAI_API_KEY" in st.secrets:
+            os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
     st.set_page_config(page_title="RAG Chatbot", layout="wide")
     st.title("🤖 RAG-based Chatbot with LangChain + Cohere")

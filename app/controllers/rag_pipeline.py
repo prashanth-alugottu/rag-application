@@ -8,7 +8,7 @@ from app.models.llm_model import load_llm
 def build_rag_chain(vectorstore):
     """Creates a modern RAG chain using create_retrieval_chain"""
     llm = load_llm()
-    retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 3})
+    retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 2})
     
     # Create a prompt template for the RAG system
     system_prompt = (
